@@ -46,17 +46,15 @@ def encode_faces(img, shapes):  # 얼굴 인코드하는 함수
 
 # 미리 저장해놓은 사용자들의 얼굴에 인코드된 데이터를 미리 저장 
 img_paths = {
-    'neo': 'img/neo.jpg',
-    'trinity': 'img/trinity.jpg',
-    'morpheus': 'img/morpheus.jpg',
-    'smith': 'img/smith.jpg'
+    'songkangho': 'img/parasite/songkangho1.jpg',
+    'parksodam': 'img/parasite/parksodam1.jpg',
+    'choiwoosik': 'img/parasite/choiwoosik1.jpg'
 }
 
 descs = {  # 계산한 결과를 저장할 변수
-    'neo': None,
-    'trinity': None,
-    'morpheus': None,
-    'smith': None
+    'songkangho': None,
+    'parksodam': None,
+    'choiwoosik': None
 }
 
 for name, img_path in img_paths.items():  
@@ -74,7 +72,7 @@ print(descs) # descs 확인
 
 
 
-img_bgr = cv2.imread('img/matrix123.jpg')  # matrix5.jpg 파일 읽기 
+img_bgr = cv2.imread('img/parasite/poster1.jpg')  # poster1.jpg 파일 읽기 
 img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)  # 이미지 컬러 RGB로 변환
 
 rects, shapes, _ = find_faces(img_rgb)
@@ -94,7 +92,9 @@ for i, desc in enumerate(descriptors):  # descriptors만큼 loop 돌기
         # a, b 벡터 사이의 유클리드 거리(유클리디안 distance)를 구함(np.linalg.norm(a-b))
         # 2차원 그래프상에서 각 사람의 좌표값에 얼마나 가까운지를 통해 그 사람임을 판단
 
-        if dist < 0.6:  # 0.6으로 했을 때 성능이 가장 좋다고 함
+        if dist < 0.48:  
+        # 0.6으로 했을 때 성능이 가장 좋다고 함
+        # 얼굴의 특징과 서로 차이가 뚜렷하지 않을 때에는 값을 낮추는 것이 정확도가 높음을 확인
             found = True
 
             text = ax.text(rects[i][0][0], rects[i][0][1], name,  # 찾게 되면 그 사람의 name을 쓰기
@@ -117,6 +117,6 @@ for i, desc in enumerate(descriptors):  # descriptors만큼 loop 돌기
                              linewidth=2, edgecolor='r', facecolor='none')
         ax.add_patch(rect)
 
-#plt.axis('off')
+plt.axis('off')
 plt.savefig('result/output.png')
 plt.show()
