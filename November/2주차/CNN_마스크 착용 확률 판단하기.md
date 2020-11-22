@@ -2,7 +2,11 @@
 
 요즘은 코로나 감염, 전염을 막기 위해 마스크를 필수적으로 착용해야 한다. 이에 마스크 착용을 인식하고 확률을 판단하는 실습을 진행해보았다.
 
-MobileNetV2를 사용해 Transfer learning
+---
+**DataSet(with mask, without mask)** :  [https://github.com/prajnasb/observations](https://github.com/prajnasb/observations)
+
+---
+ MobileNetV2를 사용해 Transfer learning
 ```python
 # 사진에서 마스크 인식하여 확률 나타내기
 
@@ -244,7 +248,3 @@ while cap.isOpened():
 out.release()
 cap.release()
 ```
-
-Reference
----
-**DataSet(with mask, without mask)** :  [https://github.com/prajnasb/observations](https://github.com/prajnasb/observations)
